@@ -1,0 +1,421 @@
+{% extends'layout/admin.html' %}
+{% block title %}Admin{% endblock %}
+{% block head %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="row mb-3">
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="bg-soft-primary rounded p-3">
+                            <svg width="24px" height="24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M13,2.05C18.05,2.55 22,6.82 22,12C22,13.45 21.68,14.83 21.12,16.07L18.5,14.54C18.82,13.75 19,12.9 19,12C19,8.47 16.39,5.57 13,5.08V2.05M12,19C14.21,19 16.17,18 17.45,16.38L20.05,17.91C18.23,20.39 15.3,22 12,22C6.47,22 2,17.5 2,12C2,6.81 5.94,2.55 11,2.05V5.08C7.61,5.57 5,8.47 5,12A7,7 0 0,0 12,19M12,6A6,6 0 0,1 18,12C18,14.97 15.84,17.44 13,17.92V14.83C14.17,14.42 15,13.31 15,12A3,3 0 0,0 12,9L11.45,9.05L9.91,6.38C10.56,6.13 11.26,6 12,6M6,12C6,10.14 6.85,8.5 8.18,7.38L9.72,10.05C9.27,10.57 9,11.26 9,12C9,13.31 9.83,14.42 11,14.83V17.92C8.16,17.44 6,14.97 6,12Z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span>Total SMS Balance</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="counter"></h6>
+                        <div id="iq-chart-box1"></div>
+                        <div class=" d-flex align-items-center text-primary" id="">
+                            <h4><b id="balance"></b></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="rounded p-3 bg-soft-warning">
+                            <svg width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M19 3H5A2 2 0 0 0 3 5V19A2 2 0 0 0 5 21H19A2 2 0 0 0 21 19V5A2 2 0 0 0 19 3M5 19V17H8.13A4.13 4.13 0 0 0 9.4 19M19 19H14.6A4.13 4.13 0 0 0 15.87 17H19M19 15H14V16A2 2 0 0 1 10 16V15H5V5H19Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span>Group SMS Sent</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6><b id="tgtext">Today</b></h6>
+                        </div>
+                        <div id="iq-chart-box4">
+                        </div>
+                        <div class=" d-flex align-items-center text-warning">
+                            <h5><b id="group_sent"></b></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="rounded p-3 bg-soft-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span>API Sent</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6><b id="ttext">Today</b></h6>
+                        </div>
+                        <div id="iq-chart-box4">
+                        </div>
+                        <div class=" d-flex align-items-center text-warning">
+                            <h5><b id="api_sent"></b></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="rounded p-3 bg-soft-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span>Single Sent</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6><b id="tstext">Today</b></h6>
+                        </div>
+                        <div id="iq-chart-box4">
+                        </div>
+                        <div class=" d-flex align-items-center text-warning">
+                            <h5><b id="single_sent"></b></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm">
+                            Delivery Report - <b id="tdate">{{ config['Date'] }}</b>
+                        </div>
+                        <div class="col-sm">
+                            <input type="date" class="form-control" id="date" oninput="LoadDayStats()">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center">
+                            <thead>
+                            <tr class="bg-dark text-light fw-bolder">
+                                <th>Delivered</th>
+                                <th>Undelivered</th>
+                                <th>Expired</th>
+                                <th>?</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td id="delivered"></td>
+                                <td id="undelivered"></td>
+                                <td id="expired"></td>
+                                <td id="unknown"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6>Group SMS Report</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-xs text-center">
+                            <thead>
+                            <tr class="bg-soft-warning text-dark fw-bolder">
+                                <th>Batch-Id</th>
+                                <th>G.Name</th>
+                                <th>Consumed</th>
+                            </tr>
+                            </thead>
+                            <tbody id="group_report">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <b>API Message Analysis of past 10 days</b>
+                </div>
+                <div class="card-body">
+                    <div id="curve_chart" style="width: 100%; height: 350px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let api_key = '{{ config['TXT_API_KEY'] }}';
+        const ins = axios.create({
+            baseURL: '{{ config['TXT_URL'] }}'
+        });
+        let data = {'D': 0, 'E': 0, 'U': 0, '?': 0};
+
+        let today = new Date().toISOString().slice(0, 10);
+
+        let graph_data = [];
+        let graph_data2 = [];
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function to_unix(str) {
+            let date = new Date(str);
+            return date.getTime() / 1000;
+        }
+
+        function to_date(unix) {
+            let date = new Date(unix * 1000);
+            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+
+        }
+
+
+        function generateLast10Dates() {
+            let last10_dates = [];
+            let date = new Date();
+            let unix = date.getTime() / 1000;
+            for (let i = 0; i < 10; i++) {
+                last10_dates.push(to_date(unix));
+                unix -= 86400;
+            }
+            return last10_dates;
+        }
+
+        let dates_ = generateLast10Dates();
+
+        for (let i = 0; i < 10; i++) {
+            graph_data.push([dates_[i], 0]);
+            ins.get('/get_history_api', {
+                params: {
+                    apikey: api_key,
+                    min_time: to_unix(dates_[i]),
+                    max_time: to_unix(dates_[i]) + 86400
+                }
+            }).then(res => {
+                graph_data[i][1] = res.data.total;
+            })
+        }
+
+
+        function drawChart() {
+            setInterval(function () {
+                let data = google.visualization.arrayToDataTable([
+                    ['Date', 'Messages'],
+                    ...graph_data
+                ]);
+                let options = {
+                    title: 'API Message Analysis of past 10 days',
+                    curveType: 'function',
+                    legend: {position: 'bottom'}
+                };
+                let chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+                chart.draw(data, options);
+            }, 1000)
+
+        }
+
+
+        setInterval(function () {
+            ins.get('/balance', {
+                params: {
+                    apikey: api_key
+                }
+            }).then(function (response) {
+                $('#balance').html(response.data.balance.sms);
+            })
+        }, 3000)
+
+        ins.get('/get_history_api/', {
+            params: {
+                apikey: api_key,
+                min_time: '{{ config['date_unix'] }}',
+            }
+        }).then(function (response) {
+            $('#api_sent').html(response.data.total);
+            console.log(response.data);
+            const unique = [...new Set(response.data.messages.map(item => item.status))];
+            if (response.data.total > 0) {
+                response.data.messages.forEach(function (item) {
+                    unique.forEach(function (status) {
+                        if (item.status === status) {
+                            data[status] += 1;
+                        }
+                    });
+
+                    $('#delivered').html(data['D']);
+                    $('#undelivered').html(data['U']);
+                    $('#expired').html(data['E']);
+                    $('#unknown').html(data['?']);
+
+                });
+            } else {
+
+                $('#delivered').html(0);
+                $('#undelivered').html(0);
+                $('#expired').html(0);
+                $('#unknown').html(0);
+            }
+        });
+
+
+        ins.get('/get_history_group/', {
+            params: {
+                apikey: api_key,
+                min_time: '{{ config['date_unix'] }}',
+            }
+        }).then(function (response) {
+            $('#group_sent').html(response.data.total);
+            if (response.data.total > 0) {
+                response.data.messages.forEach(function (item) {
+                    $('#group_report').append(`
+                        <tr>
+                            <td>${item.batch_id}</td>
+                            <td>${item.group_name}</td>
+                            <td>${item.num_credits}</td>
+                        </tr>
+                    `);
+                });
+            } else {
+                $('#group_report').append(`
+                    <tr>
+                        <td colspan="3">No Data</td>
+                    </tr>
+                `);
+            }
+        });
+
+        ins.get('/get_history_single/', {
+            params: {
+                apikey: api_key,
+                min_time: '{{ config['date_unix'] }}',
+            }
+        }).then(function (response) {
+            $('#single_sent').html(response.data.total);
+        });
+
+
+        function LoadDayStats() {
+            let date = $('#date').val();
+            $('#tdate').html(date);
+            $('#ttext').html(date);
+            //convert date to unix
+            let unix = new Date(date).getTime() / 1000;
+            ins.get('/get_history_api/', {
+                params: {
+                    apikey: api_key,
+                    min_time: unix,
+                    max_time: unix + 86400
+                }
+            }).then(function (response) {
+                console.log(response.data);
+                $('#api_sent').html(response.data.total);
+                const unique = [...new Set(response.data.messages.map(item => item.status))];
+                if (response.data.total > 0) {
+                    response.data.messages.forEach(function (item) {
+                        unique.forEach(function (status) {
+                            if (item.status === status) {
+                                data[status] += 1;
+                            }
+                        });
+
+                        $('#delivered').html(data['D']);
+                        $('#undelivered').html(data['U']);
+                        $('#expired').html(data['E']);
+                        $('#unknown').html(data['?']);
+
+                    });
+                } else {
+                    swal("Error !!", "No Data Found for the Date " + date, "error");
+                    $('#delivered').html(0);
+                    $('#undelivered').html(0);
+                    $('#expired').html(0);
+                    $('#unknown').html(0);
+                }
+            })
+
+
+            ins.get('/get_history_group/', {
+                params: {
+                    apikey: api_key,
+                    min_time: unix,
+                    max_time: unix + 86400
+                }
+            }).then(function (response) {
+                $('#tgtext').html(date);
+                $('#group_sent').html(response.data.total);
+                $('#group_report').html('');
+                if (response.data.total > 0) {
+                    response.data.messages.forEach(function (item) {
+                        $('#group_report').append(`
+                        <tr>
+                            <td>${item.batch_id}</td>
+                            <td>${item.group_name}</td>
+                            <td>${item.num_credits}</td>
+                        </tr>
+                    `);
+                    });
+                } else {
+                    $('#group_report').append(`
+                    <tr>
+                        <td colspan="3">No Data</td>
+                    </tr>
+                `);
+                }
+            });
+
+            ins.get('/get_history_single/', {
+                params: {
+                    apikey: api_key,
+                    min_time: unix,
+                    max_time: unix + 86400
+                }
+            }).then(function (response) {
+                $('#tsent').html(date);
+                $('#single_sent').html(response.data.total);
+            });
+
+
+        }
+
+    </script>
+
+{% endblock %}

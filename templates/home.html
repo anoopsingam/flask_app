@@ -1,0 +1,71 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <section class="login-content">
+            <center>
+                <div class="mt-5 card card-transparent shadow-card d-flex justify-content-center mb-0 auth-card">
+                    <div class="card-body">
+                        <a href="{{ url_for('ap.home') }}"
+                           class="navbar-brand  mb-3">
+                            <!--Logo start-->
+                            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"
+                                 class="logo-icon">
+                            <!--logo End-->
+
+                            <h5 class="logo-title fw-bolder text-danger ms-3">{{ config['APP_NAME'] }}</h5>
+                        </a>
+                        <center>
+
+                            {% if 'google_id' in session %}
+                                <img src="{{ session['picture'] }}" alt="">
+                                <h5 class="text-center mt-3">Welcome {{ session['name'] }}</h5>
+                                <a href="{{ url_for('auth.dashboard') }}" class="btn btn-success mt-3">Admin Panel</a>
+                                <a href="{{ url_for('auth.logout') }}" class="btn btn-danger mt-3">Logout</a>
+                            {% else %}
+                                <h2 class="mb-2 text-center">Sign In</h2>
+                                <a href="/login" class="text-center align-content-center">
+                                    <img id="google" class="mt-3"
+                                         src="{{ url_for('static',filename='images/google.png') }}"
+                                         alt="Google" height="80">
+                                </a>
+                            {% endif %}
+
+                        </center>
+                        <br><br><br>
+                        <p class="text-center my-3">Our Presence In</p>
+                        <div class="d-flex justify-content-center">
+                            <ul class="list-group list-group-horizontal list-group-flush">
+                                <li class="list-group-item border-0 pb-0">
+                                    <a href="#"><img
+                                            src="{{ url_for('static', filename='images/brands/fb.svg') }}"
+                                            alt="fb"></a>
+                                </li>
+                                <li class="list-group-item border-0 pb-0">
+                                    <a href="#"><img
+                                            src="{{ url_for('static', filename='images/brands/gm.svg') }}"
+                                            alt="gm"></a>
+                                </li>
+                                <li class="list-group-item border-0 pb-0">
+                                    <a href="#"><img
+                                            src="{{ url_for('static', filename='images/brands/im.svg') }}"
+                                            alt="im"></a>
+                                </li>
+                                <li class="list-group-item border-0 pb-0">
+                                    <a href="#"><img
+                                            src="{{ url_for('static', filename='images/brands/li.svg') }}"
+                                            alt="li"></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </center>
+        </section>
+    </div>
+
+
+{% endblock %}
